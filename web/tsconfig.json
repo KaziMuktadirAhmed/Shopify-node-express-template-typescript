@@ -19,7 +19,7 @@
     "isolatedModules": true,
     "noEmit": false
   },
-  "include": ["*.ts", "**/*.ts", "privacy.js"],
+  "include": ["*.ts", "**/*.ts", "privacy.js", "frontend/assets/index.js"],
   "exclude": ["node_modules", "frontend", "dist"],
   "ts-node": {
     "esm": true,

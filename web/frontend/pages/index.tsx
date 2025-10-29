@@ -4,13 +4,15 @@ import {
   Layout,
   TextContainer,
   Image,
-  Stack,
+  LegacyStack,
+  LegacyCard,
   Link,
   Text,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { useTranslation, Trans } from "react-i18next";
 
+//@ts-ignore
 import { trophyImage } from "../assets";
 
 import { ProductsCard } from "../components";
@@ -22,14 +24,14 @@ export default function HomePage() {
       <TitleBar title={t("HomePage.title")} />
       <Layout>
         <Layout.Section>
-          <Card sectioned>
-            <Stack
+          <LegacyCard sectioned>
+            <LegacyStack
               wrap={false}
               spacing="extraTight"
               distribution="trailing"
               alignment="center"
             >
-              <Stack.Item fill>
+              <LegacyStack.Item fill>
                 <TextContainer spacing="loose">
                   <Text as="h2" variant="headingMd">
                     {t("HomePage.heading")}
@@ -71,8 +73,8 @@ export default function HomePage() {
                     />
                   </p>
                 </TextContainer>
-              </Stack.Item>
-              <Stack.Item>
+              </LegacyStack.Item>
+              <LegacyStack.Item>
                 <div style={{ padding: "0 20px" }}>
                   <Image
                     source={trophyImage}
@@ -80,9 +82,9 @@ export default function HomePage() {
                     width={120}
                   />
                 </div>
-              </Stack.Item>
-            </Stack>
-          </Card>
+              </LegacyStack.Item>
+            </LegacyStack>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section>
           <ProductsCard />

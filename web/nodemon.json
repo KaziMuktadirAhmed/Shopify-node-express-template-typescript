@@ -1,0 +1,9 @@
+{
+  "watch": ["."],
+  "ext": "ts,json",
+  "ignore": ["frontend/**", "dist/**", "node_modules/**"],
+  "exec": "node --loader ts-node/esm index.ts",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

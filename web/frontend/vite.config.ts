@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, type HmrOptions } from "vite";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import react from "@vitejs/plugin-react";
@@ -16,8 +16,16 @@ if (
 
 process.env.VITE_SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY;
 
+// Parse numeric ports from env vars (process.env values are strings)
+const FRONTEND_PORT = process.env.FRONTEND_PORT
+  ? parseInt(process.env.FRONTEND_PORT, 10)
+  : undefined; // undefined lets Vite auto-select a port
+
+// BACKEND_PORT used only in a URL string — keep it as a string with a sensible default:
+const BACKEND_PORT = process.env.BACKEND_PORT ?? "3000";
+
 const proxyOptions = {
-  target: `http://127.0.0.1:${process.env.BACKEND_PORT}`,
+  target: `http://127.0.0.1:${BACKEND_PORT}`,
   changeOrigin: false,
   secure: true,
   ws: false,
@@ -27,7 +35,7 @@ const host = process.env.HOST
   ? process.env.HOST.replace(/https?:\/\//, "")
   : "localhost";
 
-let hmrConfig;
+let hmrConfig: HmrOptions;
 if (host === "localhost") {
   hmrConfig = {
     protocol: "ws",
@@ -36,10 +44,11 @@ if (host === "localhost") {
     clientPort: 64999,
   };
 } else {
+  // FRONTEND_PORT may be undefined; that's ok — HMR's port is optional
   hmrConfig = {
     protocol: "wss",
-    host: host,
-    port: process.env.FRONTEND_PORT,
+    host,
+    port: FRONTEND_PORT,
     clientPort: 443,
   };
 }
@@ -52,7 +61,7 @@ export default defineConfig({
   },
   server: {
     host: "localhost",
-    port: process.env.FRONTEND_PORT,
+    port: FRONTEND_PORT, // number | undefined
     hmr: hmrConfig,
     proxy: {
       "^/(\\?.*)?$": proxyOptions,

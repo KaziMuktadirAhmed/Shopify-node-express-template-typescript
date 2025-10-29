@@ -29,7 +29,7 @@ const DEFAULT_APP_LOCALE = "en";
  */
 const SUPPORTED_APP_LOCALES = ["en", "de", "fr"];
 
-let _userLocale, _polarisTranslations;
+let _userLocale: any, _polarisTranslations: any;
 
 /**
  * Retrieves the user's locale from the `locale` request parameter and matches it to supported app locales.
@@ -126,9 +126,13 @@ const PLURAL_RULES_LOCALE_DATA = {
   zh: () => import("@formatjs/intl-pluralrules/locale-data/zh"),
 };
 
-async function loadIntlPluralRulesLocaleData(locale) {
-  return (await PLURAL_RULES_LOCALE_DATA[locale]()).default;
+async function loadIntlPluralRulesLocaleData(locale: string) {
+  const key = (
+    locale in PLURAL_RULES_LOCALE_DATA ? locale : "en"
+  ) as keyof typeof PLURAL_RULES_LOCALE_DATA;
+  return (await PLURAL_RULES_LOCALE_DATA[key]()).default;
 }
+
 /**
  * @private
  * @async
@@ -159,7 +163,7 @@ async function initI18next() {
 }
 
 function localResourcesToBackend() {
-  return resourcesToBackend(async (locale, _namespace) => {
+  return resourcesToBackend(async (locale: any, _namespace: any) => {
     return (await import(`../locales/${locale}.json`)).default;
   });
 }
@@ -180,13 +184,13 @@ async function fetchPolarisTranslations() {
   const defaultPolarisLocale = match(
     [DEFAULT_APP_LOCALE],
     SUPPORTED_POLARIS_LOCALES,
-    DEFAULT_POLARIS_LOCALE,
+    DEFAULT_POLARIS_LOCALE
   );
   // Get the closest matching user locale supported by Polaris
   const polarisLocale = match(
     [getUserLocale()],
     SUPPORTED_POLARIS_LOCALES,
-    defaultPolarisLocale,
+    defaultPolarisLocale
   );
   _polarisTranslations = await loadPolarisTranslations(polarisLocale);
   return _polarisTranslations;
@@ -222,6 +226,9 @@ const POLARIS_LOCALE_DATA = {
   "zh-TW": () => import("@shopify/polaris/locales/zh-TW.json"),
 };
 
-async function loadPolarisTranslations(locale) {
-  return (await POLARIS_LOCALE_DATA[locale]()).default;
+async function loadPolarisTranslations(locale: string) {
+  const key = (
+    locale in POLARIS_LOCALE_DATA ? locale : "en"
+  ) as keyof typeof POLARIS_LOCALE_DATA;
+  return (await POLARIS_LOCALE_DATA[key]()).default;
 }

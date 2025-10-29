@@ -1,9 +1,23 @@
 import { Routes as ReactRouterRoutes, Route } from "react-router-dom";
+import { ComponentType } from "react";
+
+interface PageModule {
+  default: ComponentType;
+}
+
+interface RouteConfig {
+  path: string;
+  component: ComponentType;
+}
+
+interface RoutesProps {
+  pages: Record<string, PageModule>;
+}
 
 /**
  * File-based routing.
  * @desc File-based routing that uses React Router under the hood.
- * To create a new route create a new .jsx file in `/pages` with a default export.
+ * To create a new route create a new .jsx/.tsx file in `/pages` with a default export.
  *
  * Some examples:
  * * `/pages/index.jsx` matches `/`
@@ -14,23 +28,24 @@ import { Routes as ReactRouterRoutes, Route } from "react-router-dom";
  *
  * @return {Routes} `<Routes/>` from React Router, with a `<Route/>` for each file in `pages`
  */
-export default function Routes({ pages }) {
+export default function Routes({ pages }: RoutesProps) {
   const routes = useRoutes(pages);
   const routeComponents = routes.map(({ path, component: Component }) => (
     <Route key={path} path={path} element={<Component />} />
   ));
 
-  const NotFound = routes.find(({ path }) => path === "/notFound").component;
+  const notFoundRoute = routes.find(({ path }) => path === "/notFound");
+  const NotFound = notFoundRoute?.component;
 
   return (
     <ReactRouterRoutes>
       {routeComponents}
-      <Route path="*" element={<NotFound />} />
+      {NotFound && <Route path="*" element={<NotFound />} />}
     </ReactRouterRoutes>
   );
 }
 
-function useRoutes(pages) {
+function useRoutes(pages: Record<string, PageModule>): RouteConfig[] {
   const routes = Object.keys(pages)
     .map((key) => {
       let path = key
@@ -63,7 +78,7 @@ function useRoutes(pages) {
         component: pages[key].default,
       };
     })
-    .filter((route) => route.component);
+    .filter((route): route is RouteConfig => !!route.component);
 
   return routes;
 }

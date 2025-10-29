@@ -3,7 +3,7 @@ import { AppProvider } from "@shopify/polaris";
 import "@shopify/polaris/build/esm/styles.css";
 import { getPolarisTranslations } from "../../utils/i18nUtils";
 
-function AppBridgeLink({ url, children, external, ...rest }) {
+function AppBridgeLink({ url, children, external, ...rest }: any) {
   const handleClick = useCallback(() => window.open(url), [url]);
 
   const IS_EXTERNAL_LINK_REGEX = /^(?:[a-z][a-z\d+.-]*:|\/\/)/;
@@ -43,7 +43,7 @@ function AppBridgeLink({ url, children, external, ...rest }) {
  * PolarisProvider also passes translations to Polaris.
  *
  */
-export function PolarisProvider({ children }) {
+export function PolarisProvider({ children }: any) {
   const translations = getPolarisTranslations();
 
   return (

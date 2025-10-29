@@ -1,16 +1,19 @@
+import type { ComponentType } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { NavMenu } from "@shopify/app-bridge-react";
-import Routes from "./Routes";
+import Routes from "./Routes.js";
 
-import { QueryProvider, PolarisProvider } from "./components";
+import { QueryProvider, PolarisProvider } from "./components/index.js";
+
+type PageModule = { default: ComponentType<any> }; // adjust props type if needed
 
 export default function App() {
   // Any .tsx or .jsx files in /pages will become a route
   // See documentation for <Routes /> for more info
   const pages = import.meta.glob("./pages/**/!(*.test.[jt]sx)*.([jt]sx)", {
     eager: true,
-  });
+  }) as Record<string, PageModule>;
   const { t } = useTranslation();
 
   return (

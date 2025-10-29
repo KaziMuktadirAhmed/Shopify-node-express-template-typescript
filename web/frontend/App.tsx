@@ -2,9 +2,9 @@ import type { ComponentType } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { NavMenu } from "@shopify/app-bridge-react";
-import Routes from "./Routes.js";
+import Routes from "./Routes";
 
-import { QueryProvider, PolarisProvider } from "./components/index.js";
+import { QueryProvider, PolarisProvider } from "./components";
 
 type PageModule = { default: ComponentType<any> }; // adjust props type if needed
 

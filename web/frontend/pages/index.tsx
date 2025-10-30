@@ -33,7 +33,7 @@ export default function HomePage() {
             >
               <LegacyStack.Item fill>
                 <TextContainer spacing="loose">
-                  <Text as="h2" variant="headingMd">
+                  <Text as="h2" variant="headingMd" fontWeight="regular">
                     {t("HomePage.heading")}
                   </Text>
                   <p>

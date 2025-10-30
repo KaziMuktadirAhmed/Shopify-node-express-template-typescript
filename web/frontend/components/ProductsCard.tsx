@@ -61,10 +61,10 @@ export function ProductsCard() {
     >
       <TextContainer spacing="loose">
         <p>{t("ProductsCard.description")}</p>
-        <Text as="h4" variant="headingMd">
+        <Text as="h4" variant="headingMd" fontWeight="regular">
           {t("ProductsCard.totalProductsHeading")}
         </Text>
-        <Text variant="bodyMd" as="p" fontWeight="semibold">
+        <Text variant="bodyMd" as="p" fontWeight="regular">
           {isLoadingCount ? "-" : data?.count}
         </Text>
       </TextContainer>

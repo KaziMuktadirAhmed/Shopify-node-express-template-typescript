@@ -8,6 +8,8 @@ import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import PrivacyWebhookHandlers from "./privacy.js";
 
+import internalDeliveryRouter from "./routes/internalDelivery.js";
+
 dotenv.config();
 
 const PORT = parseInt(
@@ -85,7 +87,7 @@ app.post("/api/products", async (_req: Request, res: Response) => {
 
 // ADMIN END APIS
 app.use("/api/admin/order-location", () => {});
-app.use("/api/admin/internal-delivery", () => {});
+app.use("/api/admin/internal-delivery", internalDeliveryRouter);
 
 app.use(shopify.cspHeaders());
 app.use(serveStatic(STATIC_PATH, { index: false }));

@@ -11,12 +11,14 @@
     "generate": "shopify app generate",
     "deploy": "shopify app deploy"
   },
-  "dependencies": {},
   "author": "BS557",
   "private": true,
   "workspaces": [
     "extensions/*",
     "web",
     "web/frontend"
-  ]
+  ],
+  "devDependencies": {
+    "@types/express": "^5.0.5"
+  }
 }

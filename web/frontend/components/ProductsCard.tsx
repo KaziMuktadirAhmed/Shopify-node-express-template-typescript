@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, LegacyCard, TextContainer, Text } from "@shopify/polaris";
+import { LegacyCard, TextContainer, Text } from "@shopify/polaris";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";

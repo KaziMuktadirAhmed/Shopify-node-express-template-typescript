@@ -1,5 +1,4 @@
 import {
-  Card,
   Page,
   Layout,
   TextContainer,

@@ -1,11 +1,14 @@
 import { join } from "path";
 import { readFileSync } from "fs";
+import dotenv from "dotenv";
 import express, { Request, Response, NextFunction } from "express";
 import serveStatic from "serve-static";
 
 import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import PrivacyWebhookHandlers from "./privacy.js";
+
+dotenv.config();
 
 const PORT = parseInt(
   process.env.BACKEND_PORT || process.env.PORT || "3000",
@@ -18,6 +21,15 @@ const STATIC_PATH =
     : `${process.cwd()}/frontend/`;
 
 const app = express();
+
+// THIRD PARTY COURIER APIS
+app.use("/api/courier", () => {});
+app.use("/api/shipping", () => {});
+
+// CUSTOMER END APIS
+app.use("/api/customer/account", () => {}); // Kept here for fetching delivery status from customer end
+app.use("/api/order", () => {}); // Manage returns (need to re-route this)
+app.use("/api/customer/image-upload", () => {}); // Utility route for uploading image from storefront
 
 // Set up Shopify authentication and webhook handling
 app.get(shopify.config.auth.path, shopify.auth.begin());
@@ -38,6 +50,7 @@ app.use("/api/*", shopify.validateAuthenticatedSession());
 
 app.use(express.json());
 
+// ------ Dummy API's (will be deleted) --------- //
 app.get("/api/products/count", async (_req: Request, res: Response) => {
   const client = new shopify.api.clients.Graphql({
     session: res.locals.shopify.session,
@@ -68,6 +81,11 @@ app.post("/api/products", async (_req: Request, res: Response) => {
   }
   res.status(status).send({ success: status === 200, error });
 });
+// ------ Dummy API's (will be deleted) --------- //
+
+// ADMIN END APIS
+app.use("/api/admin/order-location", () => {});
+app.use("/api/admin/internal-delivery", () => {});
 
 app.use(shopify.cspHeaders());
 app.use(serveStatic(STATIC_PATH, { index: false }));

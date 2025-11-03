@@ -1,14 +1,13 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "5979b1355fc1fc33469e698f5e91dabe"
-name = "app-development-kazi"
+client_id = "ec23bbd3ec5198aedf18fa5f40036f83"
+name = "app-test-joy"
 application_url = "https://byte-correction-gorgeous-fold.trycloudflare.com"
 embedded = true
-handle = "new-testing-app-9"
+handle = "app-test-joy"
 
 [build]
 automatically_update_urls_on_dev = true
-include_config_on_deploy = true
 
 [webhooks]
 api_version = "2024-01"

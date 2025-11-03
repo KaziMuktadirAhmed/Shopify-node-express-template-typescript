@@ -39,6 +39,7 @@
   "devDependencies": {
     "@shopify/stylelint-polaris": "^16.0.7",
     "@types/i18next": "^13.0.0",
+    "@types/node": "^24.9.2",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@types/react-i18next": "^8.1.0",

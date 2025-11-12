@@ -8,7 +8,8 @@ import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import PrivacyWebhookHandlers from "./privacy.js";
 
-import internalDeliveryRouter from "./routes/internalDelivery.js";
+import orderLocationRouter from "./routes/orderLocation.route.js";
+import internalDeliveryRouter from "./routes/internalDelivery.route.js";
 
 dotenv.config();
 
@@ -86,7 +87,7 @@ app.post("/api/products", async (_req: Request, res: Response) => {
 // ------ Dummy API's (will be deleted) --------- //
 
 // ADMIN END APIS
-app.use("/api/admin/order-location", () => {});
+app.use("/api/admin/order-location", orderLocationRouter);
 app.use("/api/admin/internal-delivery", internalDeliveryRouter);
 
 app.use(shopify.cspHeaders());

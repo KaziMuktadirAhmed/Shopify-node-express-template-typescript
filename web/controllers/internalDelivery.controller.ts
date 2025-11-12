@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import DeliveryMan from "../models/deliveryMan.js";
+import DeliveryMan from "../models/deliveryMan.model.js";
 // import { shopifyEventHandler } from "../services/fulfillmentEvent.js";
 
 // Interface for delivery man assignment request

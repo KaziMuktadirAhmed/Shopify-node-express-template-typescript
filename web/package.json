@@ -31,6 +31,7 @@
     "@types/compression": "^1.8.1",
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.5",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^24.9.2",
     "@types/serve-static": "^2.2.0",
     "cross-env": "^10.1.0",

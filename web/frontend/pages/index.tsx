@@ -6,7 +6,6 @@ import {
   LegacyStack,
   LegacyCard,
   Link,
-  Text,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { useTranslation, Trans } from "react-i18next";
@@ -32,9 +31,7 @@ export default function HomePage() {
             >
               <LegacyStack.Item fill>
                 <TextContainer spacing="loose">
-                  <Text as="h2" variant="headingMd" fontWeight="regular">
-                    {t("HomePage.heading")}
-                  </Text>
+                  <s-text type="strong">{t("HomePage.heading")}</s-text>
                   <p>
                     <Trans
                       i18nKey="HomePage.yourAppIsReadyToExplore"
